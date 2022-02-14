@@ -17,7 +17,7 @@
           "@models/*": [
               "models/*"
           ],
-          "@config": [
+          "@config/*": [
               "config/*"
           ],
           "@core/*": [
