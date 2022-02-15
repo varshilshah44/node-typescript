@@ -1,16 +1,18 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
-import { Logger } from '@core/logger'
 import config from '@config/config'
+import { Database, dbOptions } from '@core/database'
+import { Logger } from '@core/logger'
 
-export class Application {
+class Application {
 	app: express.Application
 
 	constructor() {
 		this.app = express()
 		this.middleware()
 		this.config()
+		this.dbConnection()
 		this.routes()
 	}
 
@@ -24,9 +26,35 @@ export class Application {
 		this.app.set('port', config.PORT)
 	}
 
+	private dbConnection() {
+		const db = new Database(
+			config.MONGO_STRING,
+			config.DB_OPTIONS as dbOptions
+		)
+		const connection = db.connect()
+		connection.once('open', () => {
+			Logger.info('Database connected')
+		})
+		connection.on('error', (err) => {
+			Logger.error(`Database Error ${err.message}`)
+		})
+		process.on('SIGINT', () => {
+			connection.close(() => {
+				Logger.info(
+					'Mongoose connection disconnected for master DB through app termination'
+				)
+				process.exit(0)
+			})
+		})
+	}
+
 	private routes() {
-		this.app.use('/', () => {
-			Logger.info('Inside route')
+		this.app.use('/api/v1', (req: Request, res: Response) => {
+			res.status(200).send('Welcome to routes')
+		})
+
+		this.app.use('/', (req: Request, res: Response) => {
+			res.status(200).send('Welcome to server')
 		})
 	}
 }
