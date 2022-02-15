@@ -3,13 +3,7 @@ import Application from './app'
 import { Logger } from '@core/logger'
 import { addAdmin } from '@core/addAdmin'
 
-Application.app.listen(Application.app.get('port'), () => {
+Application.app.listen(Application.app.get('port'), async () => {
 	Logger.info(`Listening on ${Application.app.get('port')}`)
-	addAdmin().then((res) => {
-		if (res) {
-			Logger.info('Admin added successfully')
-		} else {
-			Logger.info('Admin already added')
-		}
-	})
+	await addAdmin()
 })

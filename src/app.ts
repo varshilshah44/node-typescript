@@ -4,6 +4,7 @@ import morgan from 'morgan'
 import config from '@config/config'
 import { Database, dbOptions } from '@core/database'
 import { Logger } from '@core/logger'
+import IndexRouter from '@routes/index'
 
 class Application {
 	app: express.Application
@@ -49,9 +50,7 @@ class Application {
 	}
 
 	private routes() {
-		this.app.use('/api/v1', (req: Request, res: Response) => {
-			res.status(200).send('Welcome to routes')
-		})
+		this.app.use('/api', IndexRouter)
 
 		this.app.use('/', (req: Request, res: Response) => {
 			res.status(200).send('Welcome to server')

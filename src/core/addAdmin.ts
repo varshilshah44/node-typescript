@@ -17,8 +17,10 @@ export const addAdmin = async (): Promise<boolean> => {
 				password: encryptPassword,
 				role: 'Admin',
 			})
+			Logger.info('Admin added successfully')
 			return true
 		}
+		Logger.info('Admin already added')
 		return false
 	} catch (err) {
 		Logger.error(`Error: ${err.message}`)
