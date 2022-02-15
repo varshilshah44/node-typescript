@@ -26,13 +26,13 @@ class Application {
 		this.app.set('port', config.PORT)
 	}
 
-	private dbConnection() {
+	dbConnection() {
 		const db = new Database(
 			config.MONGO_STRING,
 			config.DB_OPTIONS as dbOptions
 		)
 		const connection = db.connect()
-		connection.once('open', () => {
+		connection.on('connected', () => {
 			Logger.info('Database connected')
 		})
 		connection.on('error', (err) => {

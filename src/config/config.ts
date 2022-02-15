@@ -6,4 +6,5 @@ export default {
 	DB_OPTIONS: {
 		useNewUrlParser: true,
 	},
+	ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
 }
