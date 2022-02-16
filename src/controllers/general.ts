@@ -22,7 +22,7 @@ export const login: RequestHandler = async (req, res) => {
 					id: checkEmailResult._id,
 					role: checkEmailResult.role,
 				}
-				const jwtToken = createJWT(jwtPayload)
+				const jwtToken = await createJWT(jwtPayload)
 				checkEmailResult.token = jwtToken
 				delete checkEmailResult.password
 				return responseHandler(res, true, 'Login successfully', checkEmailResult, 200)

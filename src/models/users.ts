@@ -27,6 +27,9 @@ const schema = new Schema<User>(
 			type: String,
 			default: 'Client',
 		},
+		token: {
+			type: String,
+		},
 	},
 	{
 		timestamps: true,
