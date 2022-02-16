@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt'
 import { userModel, User } from '@models/users'
-import config from '@config/config'
 
 export const checkEmailExist = async (email: string): Promise<boolean | User> => {
 	const result = await userModel.findOne({ email }).lean()
