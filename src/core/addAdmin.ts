@@ -12,7 +12,7 @@ export const addAdmin = async (): Promise<boolean> => {
 				12
 			)
 			await userModel.create<User>({
-				email: 'varshil.shah@solulab.co',
+				email: config.ADMIN_EMAIL,
 				name: 'Varshil',
 				password: encryptPassword,
 				role: 'Admin',

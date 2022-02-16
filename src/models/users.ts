@@ -5,6 +5,8 @@ export interface User {
 	name: string
 	password: string
 	role: 'Admin' | 'Client'
+	_id?: string
+	token?: string
 }
 
 const schema = new Schema<User>(

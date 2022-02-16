@@ -7,4 +7,6 @@ export default {
 		useNewUrlParser: true,
 	},
 	ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+	ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+	JWT_KEY: process.env.JWT_KEY,
 }
