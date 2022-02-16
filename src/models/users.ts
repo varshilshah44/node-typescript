@@ -7,6 +7,7 @@ export interface User {
 	role: 'Admin' | 'Client'
 	_id?: string
 	token?: string
+	_doc?: any
 }
 
 const schema = new Schema<User>(
